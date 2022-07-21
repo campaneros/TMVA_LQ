@@ -230,7 +230,7 @@ for lineS in listSamples:
                 if (background['%s'%sample].GetEntries()>0):
                 	df['%s'%sample]=RDataFrame(treeName,inputFile['%s'%sample])
                 	df['%s'%sample]=df['%s'%sample].Define("BDT",computeModel, model.GetVariableNames()).Snapshot(treeName,opt.outputdir+'/%s_1_muon_dataset.root'%sample)
-                	histobd['%s'%sample]=df['%s'%sample].Histo1D(ROOT.RDF.TH1DModel("Signal","Signal", 100, -1., 1.),"BDT","weight_all_1muon")
+                	histobd['%s'%sample]=df['%s'%sample].Histo1D(ROOT.RDF.TH1DModel("Signal","Signal", 100, -1., 1.),"BDT","weight_all")
                 	histobd['%s'%sample].Draw()
                 	for key in ['png','pdf']:
                 		c.SaveAs(opt.outputdir+'/Signal_%s.%s'%(sample,key))
