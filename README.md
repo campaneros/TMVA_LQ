@@ -1,6 +1,19 @@
 # TMVA_LQ
 
 This repository allow to create reduced tree with all the weight and run a BDT on them.
+## Setup the environment
+Download the following CMSSW arch
+```
+scram p -n CMSSW_12_1_0_TMVA CMSSW CMSSW_12_1_0_pre4_ROOT624
+cd CMSSW_12_1_0_pre4_ROOT624/src
+cmsenv
+```
+
+Download the code
+```
+git clone git@github.com:campaneros/TMVA_LQ.git
+
+
 
 ## Create reduced tree
 To create a reduced tree run 
