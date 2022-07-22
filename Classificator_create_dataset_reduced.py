@@ -3,9 +3,7 @@
 from ROOT import TMVA, TFile, TTree, TCut, gROOT, RDataFrame, Numba
 from subprocess import call
 from os.path import isfile
- 
-import torch
-from torch import nn
+
 
 import os
 import sys

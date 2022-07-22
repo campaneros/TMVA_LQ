@@ -4,8 +4,6 @@ from ROOT import TMVA, TFile, TTree, TCut, gROOT
 from subprocess import call
 from os.path import isfile
  
-import torch
-from torch import nn
 
 
 import os

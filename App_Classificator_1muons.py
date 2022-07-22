@@ -9,8 +9,6 @@ import ROOT.VecOps as RV
 
 import numpy as np
 
-import torch
-from torch import nn
 
 from array import array
 
