@@ -4,10 +4,6 @@ from ROOT import TMVA, TFile, TTree, TCut, gROOT
 from subprocess import call
 from os.path import isfile
  
-import torch
-from torch import nn
-
-
 import os
 import sys
 import optparse
@@ -229,7 +225,7 @@ for lineS in listSamples:
             else:
                 background['%s'%sample] = inputFile['%s'%sample].Get(treeName)
                 dataloader.AddBackgroundTree(background['%s'%sample])	
-                dataloader.SetBackgroundWeightExpression("weight_all_1muon")
+                dataloader.SetBackgroundWeightExpression("weight_all")
 
 
 
