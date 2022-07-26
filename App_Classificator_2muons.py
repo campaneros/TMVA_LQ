@@ -215,18 +215,18 @@ for lineS in listSamples:
                 df['%s'%sample]=df['%s'%sample].Define("BDT",computeModel, model.GetVariableNames()).Snapshot(treeName,opt.outputdir+'/'+'%s_2_muon_dataset.root'%sample)
                 histo['%s'%sample]=df['%s'%sample].Histo1D(ROOT.RDF.TH1DModel("Signal","Signal", 100, -1., 1.),"BDT")
                 histo['%s'%sample].Draw()
-                for key in ['png','pdf']:
-                	c.SaveAs(opt.outputdir+'/Signal_%s.%s'%(sample,key))
+#                for key in ['png','pdf']:
+#                	c.SaveAs(opt.outputdir+'/Signal_%s.%s'%(sample,key))
 
             else:
                 background['%s'%sample] = inputFile['%s'%sample].Get(treeName)
                 if (background['%s'%sample].GetEntries()>0):
                 	df['%s'%sample]=RDataFrame(treeName,inputFile['%s'%sample])
                 	df['%s'%sample]=df['%s'%sample].Define("BDT",computeModel, model.GetVariableNames()).Snapshot(treeName,opt.outputdir+'/'+'%s_2_muon_dataset.root'%sample)
-                	histobd['%s'%sample]=df['%s'%sample].Histo1D(ROOT.RDF.TH1DModel("Signal","Signal", 100, -1., 1.),"BDT","weight_all_2muon")
+                	histobd['%s'%sample]=df['%s'%sample].Histo1D(ROOT.RDF.TH1DModel("Signal","Signal", 100, -1., 1.),"BDT","weight_all")
                 	histobd['%s'%sample].Draw()
-                	for key in ['png','pdf']:
-                		c.SaveAs(opt.outputdir+'/Signal_%s.%s'%(sample,key))
+#                	for key in ['png','pdf']:
+#               		c.SaveAs(opt.outputdir+'/Signal_%s.%s'%(sample,key))
 #                	x=TMVA.Experimental.AsTensor['float'](df['%s'%sample], variables)
 
 test={}
@@ -252,15 +252,15 @@ for i,hist in enumerate(histobd):
 
 
 histos.Draw('HIST')
-for key in ['png','pdf']:
-	c.SaveAs(opt.outputdir+'/Signal_df.%s'%key)
+#for key in ['png','pdf']:
+#	c.SaveAs(opt.outputdir+'/Signal_df.%s'%key)
 
 histob.Draw('HIST')
-for key in ['png','pdf']:
-	c.SaveAs(opt.outputdir+'/background.%s'%key)
+#for key in ['png','pdf']:
+#	c.SaveAs(opt.outputdir+'/background.%s'%key)
 
 histob.SetLineColor(kRed)
 histob.Draw('HIST')
 histos.Draw('SAME')
-for key in ['png','pdf']:
-	c.SaveAs(opt.outputdir+'/S_and_B.%s'%key) 
+#for key in ['png','pdf']:
+#	c.SaveAs(opt.outputdir+'/S_and_B.%s'%key) 

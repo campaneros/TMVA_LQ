@@ -220,8 +220,10 @@ for lineS in listSamples:
                 df['%s'%sample]=df['%s'%sample].Define("BDT",computeModel, model.GetVariableNames()).Snapshot(treeName,opt.outputdir+'/%s_1_muon_dataset.root'%sample)
                 histo['%s'%sample]=df['%s'%sample].Histo1D(ROOT.RDF.TH1DModel("Signal","Signal", 100, -1., 1.),"BDT")
                 histo['%s'%sample].Draw()
-                for key in ['png','pdf']:
-                	c.SaveAs(opt.outputdir+'/Signal_%s.%s'%(sample,key))
+#                for key in ['png','pdf']:
+#                	c.SaveAs(opt.outputdir+'/Signal_%s.%s'%(sample,key))
+
+
 
             else:
                 background['%s'%sample] = inputFile['%s'%sample].Get(treeName)
@@ -230,8 +232,8 @@ for lineS in listSamples:
                 	df['%s'%sample]=df['%s'%sample].Define("BDT",computeModel, model.GetVariableNames()).Snapshot(treeName,opt.outputdir+'/%s_1_muon_dataset.root'%sample)
                 	histobd['%s'%sample]=df['%s'%sample].Histo1D(ROOT.RDF.TH1DModel("Signal","Signal", 100, -1., 1.),"BDT","weight_all")
                 	histobd['%s'%sample].Draw()
-                	for key in ['png','pdf']:
-                		c.SaveAs(opt.outputdir+'/Signal_%s.%s'%(sample,key))
+#                	for key in ['png','pdf']:
+#                		c.SaveAs(opt.outputdir+'/Signal_%s.%s'%(sample,key))
 #                	x=TMVA.Experimental.AsTensor['float'](df['%s'%sample], variables)
 
 test={}

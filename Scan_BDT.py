@@ -44,6 +44,13 @@ parser.add_option("-o", "--output", dest="outputdir",
 
 parser.add_option("--step", dest="step", default=0.1,
                   help="BDT scale step")
+parser.add_option("--mass", dest="mass", default=3000,
+                  help="signal mass")
+parser.add_option("--coupling", dest="coupling", default="1p0",
+                  help="signal coupling")
+
+
+
 
 #parser.add_option("--fracData", dest="fracData", default=1,
 #                  help="fraction of data events to draw")
@@ -57,7 +64,7 @@ if not opt.outputdir:
     parser.error('output dir not provided')
 
 if 2/float(opt.step) %2 != 0:
-    parser.error('wrong step choise, 2/step should be an integer, you obtain'+2/float(opt.step))
+    parser.error('wrong step choise, 2/step should be an integer, you obtain '+str(2/float(opt.step)))
 
 
 #if not opt.FileName:
@@ -92,14 +99,14 @@ def variable(bdt):
 	#			print(subFiles)
 				chain.Add('%s' % subFiles)
 				inputFile['%s'%sample] = TFile.Open(subFiles)
-				if 'LQ' in sample:
-					signal['%s'%sample] = inputFile['%s'%sample].Get(treeName)
-					df['%s'%sample]=RDataFrame(treeName,inputFile['%s'%sample])
-					for mass in [1000,2000,3000]:   
-						df['%s_%s_%s'%(sample,str(mass),bdt)]=df['%s'%sample].Filter("m_muj_ak4>({}-{}*0.05)&&m_muj_ak4<{}+{}*0.05&&BDT[0]>{}".format(mass,mass,mass,mass,bdt))
-						histo['%s_%s_%s'%(sample,str(mass),bdt)]=df['%s_%s_%s'%(sample,str(mass),bdt)].Histo1D(ROOT.RDF.TH1DModel("Signal","Signal", 50, mass-mass*0.10, mass+mass*0.10),"m_muj_ak4","weight_all")
-
-						n_signal+=histo['%s_%s_%s'%(sample,str(mass),bdt)].GetEntries()
+				if 'LQ' in sample:	
+					if (str(opt.mass) in sample) and (str(opt.coupling) in sample):
+						signal['%s'%sample] = inputFile['%s'%sample].Get(treeName)
+						df['%s'%sample]=RDataFrame(treeName,inputFile['%s'%sample])
+						df['%s_%s'%(sample,bdt)]=df['%s'%sample].Filter("m_muj_ak4>({}-{}*2*0.05)&&m_muj_ak4<{}+{}*2*0.05&&BDT[0]>{}".format(int(opt.mass),int(opt.mass),int(opt.mass),int(opt.mass),bdt))
+						histo['%s_%s'%(sample,bdt)]=df['%s_%s'%(sample,bdt)].Histo1D(ROOT.RDF.TH1DModel("Signal","Signal", 100, int(opt.mass)-int(opt.mass)*0.10, int(opt.mass)+int(opt.mass)*0.10),"m_muj_ak4","weight_all")
+						histo['clone_%s_%s'%(sample,bdt)]= histo['%s_%s'%(sample,bdt)].Clone()
+						n_signal+=float(histo['clone_%s_%s'%(sample,bdt)].GetSumOfWeights())
 						#if i==0:
 							#print(n_signal)
 
@@ -107,12 +114,10 @@ def variable(bdt):
 					background['%s'%sample] = inputFile['%s'%sample].Get(treeName)
 					if (background['%s'%sample].GetEntries()>0):
 						df['%s'%sample]=RDataFrame(treeName,inputFile['%s'%sample])
-						for mass in [1000,2000,3000]:   
-							df['%s_%s_%s'%(sample,str(mass),bdt)]=df['%s'%sample].Filter("m_muj_ak4>({}-{}*0.05)&&m_muj_ak4<{}+{}*0.05&&BDT[0]>{}".format(mass,mass,mass,mass,bdt))
-							histo['%s_%s_%s'%(sample,str(mass),bdt)]=df['%s_%s_%s'%(sample,str(mass),bdt)].Histo1D(ROOT.RDF.TH1DModel("Background","Background", 50, mass-mass*0.10, mass+mass*0.10),"m_muj_ak4","weight_all_1muon")
-
-
-							n_background+= int(histo['%s_%s_%s'%(sample,mass,bdt)].GetEntries())
+						df['%s_%s'%(sample,bdt)]=df['%s'%sample].Filter("m_muj_ak4>({}-{}*0.05)&&m_muj_ak4<{}+{}*0.05&&BDT[0]>{}".format(int(opt.mass),int(opt.mass),int(opt.mass),int(opt.mass),bdt))
+						histo['%s_%s'%(sample,bdt)]=df['%s_%s'%(sample,bdt)].Histo1D(ROOT.RDF.TH1DModel("Background","Background", 100, int(opt.mass)-int(opt.mass)*0.10, int(opt.mass)+int(opt.mass)*0.10),"m_muj_ak4","weight_all")
+						histo['clone_%s_%s'%(sample,bdt)]= histo['%s_%s'%(sample,bdt)].Clone()
+						n_background+= float(histo['clone_%s_%s'%(sample,bdt)].GetSumOfWeights())
 
 			#print (n_signal,n_background)
 			#return (n_signal,n_background)
@@ -253,7 +258,7 @@ if __name__ == '__main__':
 		#for p in processes:
                 #	p.join()
 		#print(n_signal,n_background)	
-		histo['Significance'].SetBinContent(i,k[0]/(0.4990/2+sqrt(k[1])))
+		histo['Significance'].SetBinContent(i,k[0]/(3/2+sqrt(k[1])))
 #		for mass in [1000,2000,3000]:
 #			n_signal+=n_sig['%s_%s'%(mass,bdt)]
 #			n_background+=n_back['%s_%s'%(mass,bdt)]
@@ -266,7 +271,7 @@ if __name__ == '__main__':
 	#	print(i,n_sig['%s'%bdt],n_back['%s'%bdt], n_sig['%s'%bdt]/(0.4990/2+sqrt(n_back['%s'%bdt])))
 	#	histo['Significance'].SetBinContent(i,n_sig['%s'%bdt]/(0.4990/2+sqrt(n_back['%s'%bdt])))
 	histo['Significance'].Draw()
-	c.SaveAs(opt.outputdir+"test_new.png")
+	c.SaveAs(opt.outputdir+"/LQ_"+str(opt.mass)+"_"+str(opt.coupling)+".png")
 
 
 	cfg.close()

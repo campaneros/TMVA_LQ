@@ -80,6 +80,7 @@ def variable(lineV,histoCounterBini,histoCounterName):
 
             if(float(xsec)<0):
                 thisNgen = inputFile['%s'%sample].Get(histoCounterName).GetBinContent(1)
+                realNgen = inputFile['%s'%sample].Get(histoCounterName).GetBinContent(int(1))
             else:
                 #thisNgen = inputFile['%s'%sample].Get(histoCounterName).GetBinContent(int(3))
                 thisNgen = inputFile['%s'%sample].Get(histoCounterName).GetBinContent(int(histoCounterBin))
@@ -118,6 +119,28 @@ def variable(lineV,histoCounterBini,histoCounterName):
                 dfs['%s'%sample]=dfs['%s'%sample].Define("NAK4jets","float(nAK4jets)")
                 dfs_1muon['%s'%sample]=dfs['%s'%sample].Filter("passNoiseFilters==1 && PassJSON==1 && passHLTMuon==1 && fabs(Muon1_Eta)<2.4 && Muon1_PFIso<0.05 && Muon1_Pt>55 && AK4Jet1_Pt>90 && Muon1_Pt/AK4Jet1_Pt>0.6 && Muon1_Pt/AK4Jet1_Pt<1.6 && dPhi_muj_ak4>2.5 && met/sqrt(sumEt)<10&&nEleIdIso==0&&nMuonId==1&&Muon1_PFIso<0.05").Snapshot(treeName,opt.outputdir+'/'+'%s_1_muon_dataset.root'%sample)
                 dfs_2muon['%s'%sample]=dfs['%s'%sample].Filter("passNoiseFilters==1 && PassJSON==1 && passHLTMuon==1 && fabs(Muon1_Eta)<2.4 && Muon1_PFIso<0.05 && Muon1_Pt>55 && AK4Jet1_Pt>90 && Muon1_Pt/AK4Jet1_Pt>0.6 && Muon1_Pt/AK4Jet1_Pt<1.6 && dPhi_muj_ak4>2.5 && met/sqrt(sumEt)<10&&nEleIdIso==0&&Muon1_PFIso<0.05&&nMuonId==2&&Muon2_TrkIso<0.1&&sqrt((Muon1_Phi-Muon2_Phi)*(Muon1_Phi-Muon2_Phi)+(Muon1_Eta-Muon2_Eta)*(Muon1_Eta-Muon2_Eta))>0.1&&m_mumu>110").Snapshot(treeName,opt.outputdir+'/'+'%s_2_muon_dataset.root'%sample)
+
+            elif "DAT" in name:
+                print(sample)
+                dfs['%s'%sample]=RDataFrame(treeName,inputFile['%s'%sample])
+                weight=-1 
+                dfs['%s'%sample]=dfs['%s'%sample].Define("weight_all","float({})".format(weight))
+                dfs['%s'%sample]=dfs['%s'%sample].Define("weight_sample","float({})".format(weight))
+                dfs['%s'%sample]=dfs['%s'%sample].Define("weight_sample_nogen","float({})".format(weight))
+                dfs['%s'%sample]=dfs['%s'%sample].Define("met_over_sq_sumEt","float(met/sqrt(sumEt))")
+                dfs['%s'%sample]=dfs['%s'%sample].Define("Muon1_Pt_over_AK4Jet1_Pt","float(Muon1_Pt/AK4Jet1_Pt)")
+                dfs['%s'%sample]=dfs['%s'%sample].Define("Muon1_Pt_over_m_muj_ak4","float(Muon1_Pt/m_muj_ak4)")
+                dfs['%s'%sample]=dfs['%s'%sample].Define("AK4Jet1_Pt_over_m_muj_ak4","float(AK4Jet1_Pt/m_muj_ak4)")
+                dfs['%s'%sample]=dfs['%s'%sample].Define("Muon2_Pt_over_m_muj_ak4","float(Muon2_Pt/m_muj_ak4)")
+                dfs['%s'%sample]=dfs['%s'%sample].Define("Muon1_Eta_m_Muon2_Eta","float(Muon1_Eta-Muon2_Eta)")
+                dfs['%s'%sample]=dfs['%s'%sample].Define("DPhi_muj_ak4","float(dPhi_muj_ak4)")
+                dfs['%s'%sample]=dfs['%s'%sample].Define("DEta_muj_ak4","float(dEta_muj_ak4)")
+                dfs['%s'%sample]=dfs['%s'%sample].Define("NAK4jets","float(nAK4jets)")
+                dfs_1muon['%s'%sample]=dfs['%s'%sample].Filter("passNoiseFilters==1 && PassJSON==1 && passHLTMuon==1 && fabs(Muon1_Eta)<2.4 && Muon1_PFIso<0.05 && Muon1_Pt>55 && AK4Jet1_Pt>90 && Muon1_Pt/AK4Jet1_Pt>0.6 && Muon1_Pt/AK4Jet1_Pt<1.6 && dPhi_muj_ak4>2.5 && met/sqrt(sumEt)<10&&nEleIdIso==0&&nMuonId==1&&Muon1_PFIso<0.05").Snapshot(treeName,opt.outputdir+'/'+'%s_1_muon_dataset.root'%sample)
+                dfs_2muon['%s'%sample]=dfs['%s'%sample].Filter("passNoiseFilters==1 && PassJSON==1 && passHLTMuon==1 && fabs(Muon1_Eta)<2.4 && Muon1_PFIso<0.05 && Muon1_Pt>55 && AK4Jet1_Pt>90 && Muon1_Pt/AK4Jet1_Pt>0.6 && Muon1_Pt/AK4Jet1_Pt<1.6 && dPhi_muj_ak4>2.5 && met/sqrt(sumEt)<10&&nEleIdIso==0&&Muon1_PFIso<0.05&&nMuonId==2&&Muon2_TrkIso<0.1&&sqrt((Muon1_Phi-Muon2_Phi)*(Muon1_Phi-Muon2_Phi)+(Muon1_Eta-Muon2_Eta)*(Muon1_Eta-Muon2_Eta))>0.1&&m_mumu>110").Snapshot(treeName,opt.outputdir+'/'+'%s_2_muon_dataset.root'%sample)
+
+
+
 
             else:
                 test=int(0.2/weight_real)
