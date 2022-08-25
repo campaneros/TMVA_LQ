@@ -219,7 +219,7 @@ for lineS in listSamples:
                 #histo['%s'%sample]=TH1F('Signal_%s'%sample, 'Signal_%s'%sample, 100, -1, 1)
                 df['%s'%sample]=df['%s'%sample].Define("BDT",computeModel, model.GetVariableNames()).Snapshot(treeName,opt.outputdir+'/%s_1_muon_dataset.root'%sample)
                 histo['%s'%sample]=df['%s'%sample].Histo1D(ROOT.RDF.TH1DModel("Signal","Signal", 100, -1., 1.),"BDT")
-                histo['%s'%sample].Draw()
+                #histo['%s'%sample].Draw()
 #                for key in ['png','pdf']:
 #                	c.SaveAs(opt.outputdir+'/Signal_%s.%s'%(sample,key))
 
@@ -231,45 +231,46 @@ for lineS in listSamples:
                 	df['%s'%sample]=RDataFrame(treeName,inputFile['%s'%sample])
                 	df['%s'%sample]=df['%s'%sample].Define("BDT",computeModel, model.GetVariableNames()).Snapshot(treeName,opt.outputdir+'/%s_1_muon_dataset.root'%sample)
                 	histobd['%s'%sample]=df['%s'%sample].Histo1D(ROOT.RDF.TH1DModel("Signal","Signal", 100, -1., 1.),"BDT","weight_all")
-                	histobd['%s'%sample].Draw()
+                	print(sample)
+                	#histobd['%s'%sample].Draw()
 #                	for key in ['png','pdf']:
 #                		c.SaveAs(opt.outputdir+'/Signal_%s.%s'%(sample,key))
 #                	x=TMVA.Experimental.AsTensor['float'](df['%s'%sample], variables)
 
-test={}
+#test={}
 
 
 
-for i,hist in enumerate(histo):
-	#histo['%s'%hist].Draw()
-	if i == 0:
-		histos=histo['%s'%hist].Clone()
-	else:
-		test['%s'%hist]=TH1F('Signal_%s'%sample, 'Signal_%s'%sample, 100, -1, 1)
-		test['%s'%hist]=histo['%s'%hist].Clone()
-		histos.Add(test['%s'%hist])
-
-for i,hist in enumerate(histobd):
-	#histo['%s'%hist].Draw()
-	if i == 0:
-		histob=histobd['%s'%hist].Clone()
-	else:
-		test['%s'%hist]=TH1F('Signal_%s'%sample, 'Signal_%s'%sample, 100, -1, 1)
-		test['%s'%hist]=histobd['%s'%hist].Clone()
-		histob.Add(test['%s'%hist])
-
-
-
-histos.Draw('HIST')
-for key in ['png','pdf']:
-	c.SaveAs(opt.outputdir+'/Signal_df.%s'%key)
-
-histob.Draw('HIST')
-for key in ['png','pdf']:
-	c.SaveAs(opt.outputdir+'/background.%s'%key)
-
-histob.SetLineColor(kRed)
-histob.Draw('HIST')
-histos.Draw('SAME')
-for key in ['png','pdf']:
-	c.SaveAs(opt.outputdir+'/S_and_B.%s'%key) 
+#for i,hist in enumerate(histo):
+#	#histo['%s'%hist].Draw()
+#	if i == 0:
+#		histos=histo['%s'%hist].Clone()
+#	else:
+#		test['%s'%hist]=TH1F('Signal_%s'%sample, 'Signal_%s'%sample, 100, -1, 1)
+#		test['%s'%hist]=histo['%s'%hist].Clone()
+#		histos.Add(test['%s'%hist])
+#
+#for i,hist in enumerate(histobd):
+#	#histo['%s'%hist].Draw()
+#	if i == 0:
+#		histob=histobd['%s'%hist].Clone()
+#	else:
+#		test['%s'%hist]=TH1F('Signal_%s'%sample, 'Signal_%s'%sample, 100, -1, 1)
+#		test['%s'%hist]=histobd['%s'%hist].Clone()
+#		histob.Add(test['%s'%hist])
+#
+#
+#
+#histos.Draw('HIST')
+#for key in ['png','pdf']:
+#	c.SaveAs(opt.outputdir+'/Signal_df.%s'%key)
+#
+#histob.Draw('HIST')
+#for key in ['png','pdf']:
+#	c.SaveAs(opt.outputdir+'/background.%s'%key)
+#
+#histob.SetLineColor(kRed)
+#histob.Draw('HIST')
+#histos.Draw('SAME')
+#for key in ['png','pdf']:
+#	c.SaveAs(opt.outputdir+'/S_and_B.%s'%key) 

@@ -86,12 +86,12 @@ factory = TMVA.Factory(opt.outFileName, output,
 dataloader = TMVA.DataLoader('dataset')
 
 dataloader.AddVariable('DPhi_muj_ak4')
-dataloader.AddVariable('DEta_muj_ak4')
+#dataloader.AddVariable('DEta_muj_ak4')
 dataloader.AddVariable('met_over_sq_sumEt')
 dataloader.AddVariable('Muon1_Pt_over_AK4Jet1_Pt')
-dataloader.AddVariable('NAK4jets')
+#dataloader.AddVariable('NAK4jets')
 dataloader.AddVariable('AK4Jet1_Pt_over_m_muj_ak4')
-dataloader.AddVariable('Muon1_Pt_over_m_muj_ak4')
+#dataloader.AddVariable('Muon1_Pt_over_m_muj_ak4')
 
 #dataloader.AddVariable('DPhi_muj_ak4')
 #dataloader.AddVariable('DEta_muj_ak4')
@@ -176,10 +176,10 @@ for lineD in listDraw:
     dictDraw.setdefault(splitlineD[1],[]).append(splitlineD[2])
     dictDraw.setdefault(splitlineD[1],[]).append(splitlineD[3])
 
-print(dictDraw)
+#print(dictDraw)
 
 
-print(listSamples)
+#print(listSamples)
 for lineS in listSamples:
         lineS = lineS.rstrip('\n')
         splitlineS = lineS.split(" ")
@@ -267,5 +267,5 @@ factory.EvaluateAllMethods()
  
  
 # Plot ROC Curves
-roc = factory.GetROCCurve(dataloader)
-roc.SaveAs('ROC_ClassificationPyTorch_BDT.png')
+#roc = factory.GetROCCurve(dataloader)
+#roc.SaveAs('ROC_ClassificationPyTorch_BDT.png')

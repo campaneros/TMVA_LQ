@@ -103,7 +103,7 @@ def variable(bdt):
 					if (str(opt.mass) in sample) and (str(opt.coupling) in sample):
 						signal['%s'%sample] = inputFile['%s'%sample].Get(treeName)
 						df['%s'%sample]=RDataFrame(treeName,inputFile['%s'%sample])
-						df['%s_%s'%(sample,bdt)]=df['%s'%sample].Filter("m_muj_ak4>({}-{}*2*0.05)&&m_muj_ak4<{}+{}*2*0.05&&BDT[0]>{}".format(int(opt.mass),int(opt.mass),int(opt.mass),int(opt.mass),bdt))
+						df['%s_%s'%(sample,bdt)]=df['%s'%sample].Filter("(m_muj_ak4>({}-{}*2*0.05))&&(m_muj_ak4<({}+{}*2*0.05))&&BDT[0]>{}".format(int(opt.mass),int(opt.mass),int(opt.mass),int(opt.mass),bdt))
 						histo['%s_%s'%(sample,bdt)]=df['%s_%s'%(sample,bdt)].Histo1D(ROOT.RDF.TH1DModel("Signal","Signal", 100, int(opt.mass)-int(opt.mass)*0.10, int(opt.mass)+int(opt.mass)*0.10),"m_muj_ak4","weight_all")
 						histo['clone_%s_%s'%(sample,bdt)]= histo['%s_%s'%(sample,bdt)].Clone()
 						n_signal+=float(histo['clone_%s_%s'%(sample,bdt)].GetSumOfWeights())
@@ -114,7 +114,7 @@ def variable(bdt):
 					background['%s'%sample] = inputFile['%s'%sample].Get(treeName)
 					if (background['%s'%sample].GetEntries()>0):
 						df['%s'%sample]=RDataFrame(treeName,inputFile['%s'%sample])
-						df['%s_%s'%(sample,bdt)]=df['%s'%sample].Filter("m_muj_ak4>({}-{}*0.05)&&m_muj_ak4<{}+{}*0.05&&BDT[0]>{}".format(int(opt.mass),int(opt.mass),int(opt.mass),int(opt.mass),bdt))
+						df['%s_%s'%(sample,bdt)]=df['%s'%sample].Filter("(m_muj_ak4>({}-{}*2*0.05))&&(m_muj_ak4<({}+{}*2*0.05))&&BDT[0]>{}".format(int(opt.mass),int(opt.mass),int(opt.mass),int(opt.mass),bdt))
 						histo['%s_%s'%(sample,bdt)]=df['%s_%s'%(sample,bdt)].Histo1D(ROOT.RDF.TH1DModel("Background","Background", 100, int(opt.mass)-int(opt.mass)*0.10, int(opt.mass)+int(opt.mass)*0.10),"m_muj_ak4","weight_all")
 						histo['clone_%s_%s'%(sample,bdt)]= histo['%s_%s'%(sample,bdt)].Clone()
 						n_background+= float(histo['clone_%s_%s'%(sample,bdt)].GetSumOfWeights())
@@ -257,8 +257,12 @@ if __name__ == '__main__':
 	
 		#for p in processes:
                 #	p.join()
-		#print(n_signal,n_background)	
-		histo['Significance'].SetBinContent(i,k[0]/(3/2+sqrt(k[1])))
+		#print(n_signal,n_background)
+		if k[1]<0:
+			back=0
+		else:
+			back=k[1]
+		histo['Significance'].SetBinContent(i,k[0]/(3/2+sqrt(back)))
 #		for mass in [1000,2000,3000]:
 #			n_signal+=n_sig['%s_%s'%(mass,bdt)]
 #			n_background+=n_back['%s_%s'%(mass,bdt)]
