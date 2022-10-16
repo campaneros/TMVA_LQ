@@ -57,10 +57,36 @@ python3 Classificator_1muon.py -c makePlots_datasetlists_reduced.txt -f TMVA_BDT
 where the option -f must be followed by the name of the desired root output file for the BDT and the weight file. The weight file should be in the directory dataset/weights
 
 ## Apply the BDT results from xml file
-**To be optimised still**\
+
 once you have the output from the BDT you should create new root file with a branch with the output of the BDT, to do that run 
 ```
 python3 App_Classificator_1muons.py -c makePlots_datasetlists_reduced.txt -f TMVA_BDT_1muon -o BDT
 ```
 
 where the file to be used should be the weight file created from the BDT at the previous step.
+
+## Do Significance Scan on the variable
+To run a Significance Scan on the desired variable run (Example: Met_Significance)
+```
+for M in 1000 2000 3000;do echo ${M}; for p in 0p1 1p0; do python3 Scan_Met_2muons.py -c makePlots_datasetlists_2muons_BDT_noPFisp_real.txt -o Signal_BDT_2Muons_Met_dE0p5 --step 0.5 --mass ${M} --coupling ${p}; done;done
+```
+where the -o option is the output directory of the plots produced by the scripts and the -c is the file containing the list of all root files. The --step option is the step of the variable scan. **For the two variable scan the second variable step has to be changed inside the code**
+To unite all the plots on one image run
+```
+montage -tile 3x2x -geometry -2-2 -resize -0.5-0.5 Signal_BDT_2Muons_Met_dE0p5/LQ*.png Signal_BDT_2Muons_Met_dE0p5/monatge.jpg
+```
+
+### Variable Significance Scan for 1 Muon
+1. $\Delta\phi_{\mu jet}$                                     [Scan_dPhi.py]
+2. Met Significance                                           [Scan_Met.py]
+3. $P_{T}^{\mu}/P_{T}^{jet}$ && $P_{T}^{jet}/M_{\mu jet}$     [Scan_MuonPT.py]
+
+### Variable Significance Scan for 2 Muons category
+1. $P_{T}^{\mu}/P_{T}^{jet}$ && $P_{T}^{\mu}/M_{\mu jet}$     [Scan_PtOvM.py]
+2. $P_{T}^{\mu ,2}/M_{\mu jet}$ && $\Delta\phi_{\mu jet}$     [Scan_MuonPT_dPhi_2muons.py]
+3. $|\delta \eta_{\mu\mu}|$                                   [Scan_Eta1_m_Eta2.py]
+4. Met Significance                                           [Scan_Met_2muons.py]
+
+
+
+
