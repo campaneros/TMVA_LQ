@@ -35,7 +35,7 @@ rule run_BDT_1muons:
 	output:
 		config["file_TMVA_1muon"]
 	shell:
-		'python3 {input.script} -c {input.config} -f {output} > BDT_1muons_noPFisp.log'
+		'python3 {input.script} -c {input.config} -f {output} > BDT_1muons.log'
 
 rule apply_BDT_1muons:
 	input:
@@ -91,7 +91,7 @@ rule run_BDT_2muons:
 	output:
 		config["file_TMVA_2muon"]
 	shell:
-		'python3 {input.script} -c {input.config} -f {output} > BDT_2muons_noPFisp.log'
+		'python3 {input.script} -c {input.config} -f {output} > BDT_2muons.log'
 
 rule apply_BDT_2muons:
 	input:
