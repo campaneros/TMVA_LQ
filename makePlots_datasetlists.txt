@@ -1,0 +1,70 @@
+# use this symbol to comment out a line
+
+TREENAME= rootTupleTree/tree
+#HISTONAME= DijetFilter/EventCount/EventCounter 1
+HISTONAME= DijetFilter/EventCount/EventCounter 3
+
+
+#APPLYPUWEIGHT= 1
+#PILEUP= nPUtrue
+PILEUPDATA= /afs/cern.ch/work/m/mcampana/Lepto/Prod_LQ/CMSSW_10_6_28_LQAna/src/RootTreeAnalyzer/data/pileup/DataPileupHistogram_UL2018_RunB.root pileup
+PILEUPMC= /afs/cern.ch/work/m/mcampana/Lepto/Prod_LQ/CMSSW_10_6_28_LQAna/src/RootTreeAnalyzer/data/pileup/PU_MC_UL2018_santanas.root h1_nPU_true
+
+
+#SAMPLE= SingleMuon2018B /data/mcampana/CMS/ntuples/cms_lq_prod1_mu_6/merged/SingleMuon2018B_new_v9_reduced_skim.root -1 1.0 DATA
+
+
+
+SAMPLE= SingleLQ_umuLQumu_M3000_Lambda1p0 /data/mcampana/CMS/ntuples/cms_lq_prod1_mu_6/merged/SingleLQ_umuLQumu_M3000_Lambda1p0_reduced_skim.root 1.0 1.0 LQumu_M3000_L1p0
+SAMPLE= SingleLQ_umuLQumu_M1000_Lambda1p0 /data/mcampana/CMS/ntuples/cms_lq_prod1_mu_6/merged/SingleLQ_umuLQumu_M1000_Lambda1p0_reduced_skim.root 1.0 1.0 LQumu_M1000_L1p0
+SAMPLE= SingleLQ_umuLQumu_M2000_Lambda1p0 /data/mcampana/CMS/ntuples/cms_lq_prod1_mu_6/merged/SingleLQ_umuLQumu_M2000_Lambda1p0_reduced_skim.root 1.0 1.0 LQumu_M2000_L1p0
+SAMPLE= SingleLQ_umuLQumu_M3000_Lambda0p1 /data/mcampana/CMS/ntuples/cms_lq_prod1_mu_6/merged/SingleLQ_umuLQumu_M3000_Lambda0p1_reduced_skim.root 1.0 1.0 LQumu_M3000_L0p1
+SAMPLE= SingleLQ_umuLQumu_M1000_Lambda0p1 /data/mcampana/CMS/ntuples/cms_lq_prod1_mu_6/merged/SingleLQ_umuLQumu_M1000_Lambda0p1_reduced_skim.root 1.0 1.0 LQumu_M1000_L0p1
+SAMPLE= SingleLQ_umuLQumu_M2000_Lambda0p1 /data/mcampana/CMS/ntuples/cms_lq_prod1_mu_6/merged/SingleLQ_umuLQumu_M2000_Lambda0p1_reduced_skim.root 1.0 1.0 LQumu_M2000_L0p1
+#
+SAMPLE= DYJetsToLL_Pt-50To100_amcatnlo_py /data/mcampana/CMS/ntuples/cms_lq_prod1_mu_6/merged/DYJetsToLL_Pt-50To100_amcatnlo_py_reduced_skim.root 354.8 1.00457250288 DYJETS
+SAMPLE= DYJetsToLL_Pt-100To250_amcatnlo_py /data/mcampana/CMS/ntuples/cms_lq_prod1_mu_6/merged/DYJetsToLL_Pt-100To250_amcatnlo_py_reduced_skim.root 81.22 1.00457250288 DYJETS
+SAMPLE= DYJetsToLL_Pt-250To400_amcatnlo_py /data/mcampana/CMS/ntuples/cms_lq_prod1_mu_6/merged/DYJetsToLL_Pt-250To400_amcatnlo_py_reduced_skim.root 2.991 1.00457250288 DYJETS
+SAMPLE= DYJetsToLL_Pt-400To650_amcatnlo_py /data/mcampana/CMS/ntuples/cms_lq_prod1_mu_6/merged/DYJetsToLL_Pt-400To650_amcatnlo_py_reduced_skim.root 0.3882 1.00457250288 DYJETS
+SAMPLE= DYJetsToLL_Pt-650ToInf_amcatnlo_py /data/mcampana/CMS/ntuples/cms_lq_prod1_mu_6/merged/DYJetsToLL_Pt-650ToInf_amcatnlo_py_reduced_skim.root 0.03737 1.00457250288 DYJETS
+#
+SAMPLE= QCD_Pt_120to170_pythia8_2018 /data/mcampana/CMS/ntuples/cms_lq_prod1_mu_6/merged/QCD_Pt_120to170_pythia8_2018_reduced_skim.root 407300.0 1.0 QCD
+SAMPLE= QCD_Pt_170to300_pythia8_2018 /data/mcampana/CMS/ntuples/cms_lq_prod1_mu_6/merged/QCD_Pt_170to300_pythia8_2018_reduced_skim.root 103500.0 1.0 QCD
+SAMPLE= QCD_Pt_300to470_pythia8_2018 /data/mcampana/CMS/ntuples/cms_lq_prod1_mu_6/merged/QCD_Pt_300to470_pythia8_2018_reduced_skim.root 6830.0 1.0 QCD
+SAMPLE= QCD_Pt_470to600_pythia8_2018 /data/mcampana/CMS/ntuples/cms_lq_prod1_mu_6/merged/QCD_Pt_470to600_pythia8_2018_reduced_skim.root 551.2 1.0 QCD
+SAMPLE= QCD_Pt_600to800_pythia8_2018 /data/mcampana/CMS/ntuples/cms_lq_prod1_mu_6/merged/QCD_Pt_600to800_pythia8_2018_reduced_skim.root 156.7 1.0 QCD
+SAMPLE= QCD_Pt_800to1000_pythia8_2018 /data/mcampana/CMS/ntuples/cms_lq_prod1_mu_6/merged/QCD_Pt_800to1000_pythia8_2018_reduced_skim.root 26.25 1.0 QCD
+SAMPLE= QCD_Pt_1000to1400_pythia8_2018 /data/mcampana/CMS/ntuples/cms_lq_prod1_mu_6/merged/QCD_Pt_1000to1400_pythia8_2018_reduced_skim.root 7.465 1.0 QCD
+SAMPLE= QCD_Pt_1400to1800_pythia8_2018 /data/mcampana/CMS/ntuples/cms_lq_prod1_mu_6/merged/QCD_Pt_1400to1800_pythia8_2018_reduced_skim.root 0.6487 1.0 QCD
+SAMPLE= QCD_Pt_1800to2400_pythia8_2018 /data/mcampana/CMS/ntuples/cms_lq_prod1_mu_6/merged/QCD_Pt_1800to2400_pythia8_2018_reduced_skim.root 0.08734 1.0 QCD
+SAMPLE= QCD_Pt_2400to3200_pythia8_2018 /data/mcampana/CMS/ntuples/cms_lq_prod1_mu_6/merged/QCD_Pt_2400to3200_pythia8_2018_reduced_skim.root 0.005237 1.0 QCD
+SAMPLE= QCD_Pt_3200toInf_pythia8_2018 /data/mcampana/CMS/ntuples/cms_lq_prod1_mu_6/merged/QCD_Pt_3200toInf_pythia8_2018_reduced_skim.root 0.0001352 1.0 QCD
+#
+#
+SAMPLE= TTTo2L2Nu_powheg_2018 /data/mcampana/CMS/ntuples/cms_lq_prod1_mu_6/merged/TTTo2L2Nu_powheg_2018_reduced_skim.root 88.29 1.0 TTBAR
+SAMPLE= TTToHadronic_powheg_2018 /data/mcampana/CMS/ntuples/cms_lq_prod1_mu_6/merged/TTToHadronic_powheg_2018_reduced_skim.root 377.96 1.0 TTBAR
+SAMPLE= TTToSemiLeptonic_powheg_2018 /data/mcampana/CMS/ntuples/cms_lq_prod1_mu_6/merged/TTToSemiLeptonic_powheg_2018_reduced_skim.root 365.34 1.0 TTBAR
+##
+##AN2017_292_v20.pdf
+#
+#
+SAMPLE= WJetsToLNu_Pt-100To250_amcatnlo_py /data/mcampana/CMS/ntuples/cms_lq_prod1_mu_6/merged/WJetsToLNu_Pt-100To250_amcatnlo_py_reduced_skim.root 763.7 0.856925962288 WJETS
+SAMPLE= WJetsToLNu_Pt-250To400_amcatnlo_py /data/mcampana/CMS/ntuples/cms_lq_prod1_mu_6/merged/WJetsToLNu_Pt-250To400_amcatnlo_py_reduced_skim.root 27.55 0.856925962288 WJETS
+SAMPLE= WJetsToLNu_Pt-400To600_amcatnlo_py /data/mcampana/CMS/ntuples/cms_lq_prod1_mu_6/merged/WJetsToLNu_Pt-400To600_amcatnlo_py_reduced_skim.root 3.477 0.856925962288 WJETS
+SAMPLE= WJetsToLNu_Pt-600ToInf_amcatnlo_py /data/mcampana/CMS/ntuples/cms_lq_prod1_mu_6/merged/WJetsToLNu_Pt-600ToInf_amcatnlo_py_reduced_skim.root 0.5415 0.856925962288 WJETS
+SAMPLE= NLO_W /data/mcampana/CMS/ntuples/cms_lq_prod1_mu_6/merged/WJets_inclusive_NLO_reduced_skim.root 67350.0 0.856925962288 WJETS
+#
+SAMPLE= ST_t-channel_top_4f_InclusiveDecays_2018 /data/mcampana/CMS/ntuples/cms_lq_prod1_mu_6/merged/ST_t-channel_top_4f_InclusiveDecays_2018_reduced_skim.root 136.02 1.0 SINGLETOP
+SAMPLE= ST_t-channel_antitop_4f_InclusiveDecays_2018 /data/mcampana/CMS/ntuples/cms_lq_prod1_mu_6/merged/ST_t-channel_antitop_4f_InclusiveDecays_2018_reduced_skim.root 80.95 1.0 SINGLETOP
+SAMPLE= ST_tW_top_5f_inclusiveDecays_2018 /data/mcampana/CMS/ntuples/cms_lq_prod1_mu_6/merged/ST_tW_top_5f_inclusiveDecays_2018_reduced_skim.root 35.85 1.0 SINGLETOP
+SAMPLE= ST_tW_antitop_5f_inclusiveDecays_2018 /data/mcampana/CMS/ntuples/cms_lq_prod1_mu_6/merged/ST_tW_antitop_5f_inclusiveDecays_2018_reduced_skim.root 35.85 1.0 SINGLETOP
+SAMPLE= ST_s-channel_4f_leptonDecays_2018 /data/mcampana/CMS/ntuples/cms_lq_prod1_mu_6/merged/ST_s-channel_4f_leptonDecays_2018_reduced_skim.root 3.376 1.0 SINGLETOP
+#
+
+##
+
+
+
+#RunB 2018
+LUMI= 130000
+

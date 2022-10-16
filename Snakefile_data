@@ -1,0 +1,84 @@
+configfile: "config_data.yaml"
+
+
+
+
+
+rule all:
+	input:
+		first = config["TMVA_reduced_dataset_1muon"],
+		second = config["TMVA_reduced_dataset_2muon"]
+
+
+rule Create_dataset:
+	input: 
+	   script = 'Classificator_create_dataset_reduced.py',
+	   config = 'makePlots_datasetlists_data.txt'
+	output:
+		directory(config["first_directory"])
+	shell:
+		'python3 {input.script} -c {input.config} -o {output}'
+
+rule Create_file_1muons:
+	input:
+		script = 'Create_file_list.py',
+		config = 'makePlots_datasetlists_data.txt',
+		dir = expand(rules.Create_dataset.output)
+	output:
+		config["reduced_dataset_1muon"]
+	shell:
+		'python3 {input.script} -c {input.config} -f {output} -d {input.dir}'
+
+rule apply_BDT_1muons:
+	input:
+		script = 'App_Classificator_1muons.py',
+		config = expand(rules.Create_file_1muons.output),
+		filename = config["file_TMVA_1muon"]
+	output:
+		directory(config["second_directory_1Muons"])
+	shell:
+		'python3 {input.script} -c {input.config} -f {input.filename} -o {output}' 
+
+
+rule Create_BDT_file_1muon:
+	input:
+		script = 'Create_file_list.py',
+		config = expand(rules.Create_file_1muons.output),
+		dir= expand(rules.apply_BDT_1muons.output)
+	output:
+		config["TMVA_reduced_dataset_1muon"]
+	shell:
+		'python3 {input.script} -c {input.config} -f {output} -d {input.dir}'
+
+
+rule Create_file_2muons:
+	input:
+		script = 'Create_file_list.py',
+		config = 'makePlots_datasetlists_data.txt',
+		dir = expand(rules.Create_dataset.output)
+	output:
+		config["reduced_dataset_2muon"]
+	shell:
+		'python3 {input.script} -c {input.config} -f {output} -d {input.dir}'
+
+rule apply_BDT_2muons:
+	input:
+		script = 'App_Classificator_2muons.py',
+		config = expand(rules.Create_file_2muons.output),
+		filename = config["file_TMVA_2muon"]
+	output:
+		directory(config["second_directory_2Muons"])
+	shell:
+		'python3 {input.script} -c {input.config} -f {input.filename} -o {output}' 
+
+
+rule Create_BDT_file_2muon:
+	input:
+		script = 'Create_file_list.py',
+		config = expand(rules.Create_file_2muons.output),
+		dir= expand(rules.apply_BDT_2muons.output)
+	output:
+		config["TMVA_reduced_dataset_2muon"]
+	shell:
+		'python3 {input.script} -c {input.config} -f {output} -d {input.dir}'
+		
