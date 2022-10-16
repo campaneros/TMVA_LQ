@@ -12,6 +12,7 @@ cmsenv
 Download the code
 ```
 git clone git@github.com:campaneros/TMVA_LQ.git
+cd TMVA_LQ
 git checkout Snakemake
 ```
 
@@ -27,6 +28,11 @@ Edit the file config_new.yaml
 vim config_new.yaml 
 ```
 and modify all the directory according to your need
+
+To view the rules that will be excecuted run
+```
+nohup -s Snakefile_new -n -c30
+```
 
 To Create a reduced dataset, Run a BDT and Apply the BDT Results on MC and Signal Sample
 ```
