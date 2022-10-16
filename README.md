@@ -76,12 +76,12 @@ To unite all the plots on one image run
 montage -tile 3x2x -geometry -2-2 -resize -0.5-0.5 Signal_BDT_2Muons_Met_dE0p5/LQ*.png Signal_BDT_2Muons_Met_dE0p5/monatge.jpg
 ```
 
-### Variable Significance Scan for 1 Muon
+#### Variable Significance Scan for 1 Muon
 1. $\Delta\phi_{\mu jet}$                                     [Scan_dPhi.py]
 2. Met Significance                                           [Scan_Met.py]
 3. $P_{T}^{\mu}/P_{T}^{jet}$ && $P_{T}^{jet}/M_{\mu jet}$     [Scan_MuonPT.py]
 
-### Variable Significance Scan for 2 Muons category
+#### Variable Significance Scan for 2 Muons category
 1. $P_{T}^{\mu}/P_{T}^{jet}$ && $P_{T}^{\mu}/M_{\mu jet}$     [Scan_PtOvM.py]
 2. $P_{T}^{\mu ,2}/M_{\mu jet}$ && $\Delta\phi_{\mu jet}$     [Scan_MuonPT_dPhi_2muons.py]
 3. $|\delta \eta_{\mu\mu}|$                                   [Scan_Eta1_m_Eta2.py]
