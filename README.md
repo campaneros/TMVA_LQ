@@ -12,6 +12,7 @@ cmsenv
 Download the code
 ```
 git clone git@github.com:campaneros/TMVA_LQ.git
+git checkout Snakemake
 ```
 
 ## Run With Snakemake
@@ -23,7 +24,7 @@ pip3 install snakemake --user
 
 Edit the file config_new.yaml
 ```
-config_new.yaml 
+vim config_new.yaml 
 ```
 and modify all the directory according to your need
 
