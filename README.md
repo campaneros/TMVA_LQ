@@ -14,6 +14,25 @@ Download the code
 git clone git@github.com:campaneros/TMVA_LQ.git
 ```
 
+## Run With Snakemake
+To download snakmake
+```
+pip3 install snakemake --user
+```
+[Snakemake Documentation](https://snakemake.readthedocs.io/en/stable/index.html)
+
+Edit the file config_new.yaml
+```
+config_new.yaml 
+```
+and modify all the directory according to your need
+
+To Create a reduced dataset, Run a BDT and Apply the BDT Results on MC and Signal Sample
+```
+cmsenv
+nohup -s Snakefile_new -c30
+```
+
 
 ## Create reduced tree
 To create a reduced tree run 
