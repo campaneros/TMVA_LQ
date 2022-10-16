@@ -31,15 +31,15 @@ and modify all the directory according to your need
 
 To view the rules that will be excecuted run
 ```
-nohup -s Snakefile_new -n -c30
+snakemake -s Snakefile_new -n -c30
 ```
 
 To Create a reduced dataset, Run a BDT and Apply the BDT Results on MC and Signal Sample
 ```
 cmsenv
-nohup -s Snakefile_new -c30
+nohup snakemake -s Snakefile_new -c30
 ```
-
+The nohup option will detach the process from the terminal so you can close the terminal without killing it. The output of the process wil be in the file nohup.out
 
 ## Create reduced tree
 To create a reduced tree run 
